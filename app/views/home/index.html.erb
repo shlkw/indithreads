@@ -77,25 +77,28 @@
       </div>
 
 <center>
-  <% if current_user %>
+
+<% if current_user %>
   Logged in as <%= current_user.email %>.
   <%= link_to "Log Out", logout_path %>
 <% else %>
-  <%= link_to "Sign Up", signup_path %> 
+  <%= link_to "Sign Up", signup_path %>  || 
   <%= link_to  "Log In", login_path %>
 <% end %>
+
+
 <p id=”notice”> <%= notice %></p>
 
       <div class="header-right">
-        <a href="cart.html" class="card-bag"> <%= image_tag "icons/bag.png" %><span> 2 </span></a>
+        <a href="cart.html" class="card-bag"> <%= image_tag "icons/bag.png" %><span> 0 </span></a>
         <a href="#" class="search"> <%= image_tag "icons/search.png" %>
       </div>
       <!-- site menu -->
       <ul class="main-menu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="#">Dresses</a></li>
-        <li><a href="#">LookBook</a></li>
-        <li><a href="#">Blog</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/dresses">Dresses</a></li>
+        <li><a href="/lookbook">LookBook</a></li>
+        <li><a href="/blog">Blog</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
@@ -133,10 +136,10 @@
 
   
 
-
   <!-- Featured section -->
       <div class="section-title">
-      <h2> Must See </h2>
+      <h3> A digital marketplace where you can buy and sell new or used indo ethnic clothes and accessories from verified user </h3>
+            <h2> Featured Items </h2>
     </div>
   <div class="featured-section spad">
     <div class="container">

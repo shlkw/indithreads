@@ -1,34 +1,247 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @dress.title %>
-</p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @dress.description %>
-</p>
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+  <title> IndiThreads</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="The Plaza eCommerce Template">
+  <meta name="keywords" content="plaza, eCommerce, creative, html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Favicon -->   
+  <link href="img/favicon.ico" rel="shortcut icon"/>
 
-<p>
-  <strong>Text:</strong>
-  <%= @dress.text %>
-</p>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-<p>
-  <strong>Price:</strong>
-  <%= @dress.price %>
-</p>
 
-<%if signed_in?%>
-  <%=link_to "", class: "button", data: {target: @cart_action, addUrl: add_to_cart_path(@movie), removeUrl: remove_from_cart_path(@movie)} do%>
-    <i class="fi-shopping-cart"></i>
-    <span><%=@cart_action%></span> Cart
-  <%end%>
-<%end%>
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=SB_CLIENT_ID">
+  </script>
 
-<%= link_to 'Edit', edit_dress_path(@dress) %> |
-<%= link_to 'Back', dresses_path %>
+
+<script>
+  paypal.Buttons({
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '0.01'
+          }
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      // Capture the funds from the transaction
+      return actions.order.capture().then(function(details) {
+        // Show a success message to your buyer
+        alert('Transaction completed by ' + details.payer.name.given_name);
+      });
+    }
+  }).render('#paypal-button-container');
+</script>
+
+</head>
+
+
+</head>
+<body>
+  <!-- Page Preloder -->
+  <div id="preloder">
+    <div class="loader"></div>
+  </div>
+  
+  <!-- Header section -->
+  <header class="header-section header-normal">
+    <div class="container-fluid">
+      <!-- logo -->
+      <div class="site-logo">
+  <img src = "https://dewey.tailorbrands.com/production/brand_version_mockup_image/145/1715894145_fb5b3292-74b8-4566-86a8-4b7ad325c780.png?cb=1550747368", class: "footer-logo" >
+      </div>
+      <!-- responsive -->
+      <div class="nav-switch">
+        <i class="fa fa-bars"></i>
+      </div>
+
+<center>
+
+<% if current_user %>
+  Logged in as <%= current_user.email %>.
+  <%= link_to "Log Out", logout_path %>
+<% else %>
+  <%= link_to "Sign Up", signup_path %>  || 
+  <%= link_to  "Log In", login_path %>
+<% end %>
+
+      <ul class="main-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/dresses">Dresses</a></li>
+        <li><a href="/">LookBook</a></li>
+        <li><a href="/">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+  <!-- Header section end -->
+  <!-- Page -->
+  <div class="page-area product-page spad">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <figure>
+            <img class="product-big-img" src="img/product/1.jpg" alt="">
+          </figure>
+  
+          <%= image_tag @dress.dress_img.url %>
+          
+        </div>
+        <div class="col-lg-6">
+          <div class="product-content">
+            <h2> <%= @dress.title %> </h2>
+            <div class="pc-meta">
+              <h4 class="price"> $<%= @dress.price %> </h4>
+            </div>
+            <h3> Description: <%= @dress.description %> </h3> <br/>
+            <a href="#" class="site-btn btn-line"> PAY </a>
+
+
+
+  <div id="paypal-button-container"></div>
+  <script>
+    paypal.Buttons().render('#paypal-button-container');
+  </script>
+
+
+<%= link_to "Edit", edit_dress_path(@dress) %>
+
+<%= link_to "Delete", dress_path(@dress), method: :delete, data: {confirm: "Are you sure?"} %>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="product-details">
+        <div class="row">
+          <div class="col-lg-10 offset-lg-1">
+            <ul class="nav" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Seller Info </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">
+                  Chat With Seller
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false"> Seller Reviews (0)</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <!-- single tab content -->
+              <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1">
+                <p> User.Dresses.findbyID </p>
+              </div>
+              <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2">
+                <div class="review">
+                <div class="rating">
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star is-fade"></i>
+                </div>
+              </div>
+              </div>
+              <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+  <section class="footer-top-section home-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-8 col-sm-12">
+          <div class="footer-widget about-widget">
+            <img src = "https://dewey.tailorbrands.com/production/brand_version_mockup_image/145/1715894145_fb5b3292-74b8-4566-86a8-4b7ad325c780.png?cb=1550747368", class: "footer-logo" >
+            <p> This is a digital marketplace where people from the United States can buy and sell new or used Indian clothing and accessories.  </p>
+            <div class="cards">
+              <%= image_tag "cards/5.png" %>
+              <%= image_tag "cards/4.png" %>
+              <%= image_tag "cards/3.png" %>
+              <%= image_tag "cards/2.png" %>
+              <%= image_tag "cards/1.png" %>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+          <div class="footer-widget">
+            <h6 class="fw-title">Social Media</h6>
+            <ul>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">Facebook</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">PR</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+          <div class="footer-widget">
+            <h6 class="fw-title"> Usefull Links </h6>
+            <ul>
+              <li><a href="#">Partners</a></li>
+              <li><a href="#">Bloggers</a></li>
+              <li><a href="#">Support</a></li>
+              <li><a href="#">Terms of Use</a></li>
+              <li><a href="#">Press</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+          <div class="footer-widget">
+            <h6 class="fw-title">Shipping & Returns</h6>
+            <ul>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Track Orders</a></li>
+              <li><a href="#">Returns</a></li>
+              <li><a href="#">Jobs</a></li>
+              <li><a href="#">Shipping</a></li>
+              <li><a href="#">Blog</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+          <div class="footer-widget">
+            <h6 class="fw-title">Contact</h6>
+            <div class="text-box">
+              <p> IndiThreads LLC </p>
+              <p> 605 W 42nd Street, New York NY 10036 </p>
+              <p>+1 347 832 0774</p>
+              <p> admin@indithreads.com </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Footer top section end --> 
+  <!-- Footer section -->
+  <footer class="footer-section">
+    <div class="container">
+    </div>
+  </footer>
+  <!-- Footer section end -->
+
+
+
+    </body>
+</html>
+
+
 
 <script>
 $(window).load ->

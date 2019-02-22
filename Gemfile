@@ -17,6 +17,14 @@ gem 'foundation-rails'
 gem  'bcrypt'
 gem 'redis', '~> 3.0.1'
 gem 'hiredis', '~> 0.4.5'
+gem 'activemerchant'
+
+gem 'simple_form'
+gem 'jquery-rails'
+gem 'paperclip'
+gem 'braintree'
+
+
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.3.6'
 # Use Puma as the app server
