@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
-  get 'carts/show'
-  resources :dresses
+  resources :dresses 
   root 'home#index'
  
-  resources :users
+  resources :search, controller: "search", only: [:index]
+    post '/search' => 'search#search'
+
+  resources :users do
+    resource :dresses do 
+      resource :payment
+  end
+end 
   resources :sessions, only: [:new, :create, :destroy]
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
@@ -14,4 +20,12 @@ Rails.application.routes.draw do
   put 'remove/:dress_id', to: 'carts#remove', as: :remove_from
 
 end
+
+
+get '/dresses/:id/verified' => "dresses#verified", as: "verified_listing"
+
+
+
 end 
+
+
